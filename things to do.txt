@@ -1,0 +1,4 @@
+1. plot simple x y lists in matplotlib
+2. perform x,y labelling
+3. perform legends
+4. plot two separate data points in single graph
