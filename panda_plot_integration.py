@@ -1,6 +1,7 @@
 from matplotlib import pyplot as plot 
 import random
 import pandas as panda
+import numpy
 
 united_nations_immigration_data_remote_location = "https://ibm.box.com/shared/static/lw190pt9zpy5bd1ptyg2aw15awomz9pu.xlsx"
 
@@ -93,9 +94,14 @@ def draw_histogram_for_migration_in_particular_year(year):
     ## unless i change them back to numeric, x values will come as empty
     data_frame.index = data_frame.index.map(int) 
 
-    print(data_frame.loc[year])
+    # print(data_frame.loc[year]) data is a country name - number of migrants table
 
-    data_frame.loc[year].plot(kind='hist', color='purple')
+    data_frame = data_frame.loc[year]
+
+    ## even distribution on the x axis
+    count, _edges = numpy.histogram(data_frame)
+
+    data_frame.plot(kind='hist', color='purple', xticks = _edges)
 
     plot.title("HIstogram showing migration across globe for the year %d" %year)
     plot.xlabel("Number of Migrants")
