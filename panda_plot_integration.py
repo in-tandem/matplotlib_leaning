@@ -126,8 +126,46 @@ def draw_bar_chart_for_a_country_trend(country):
     plot.ylabel("Number of Countries")
     plot.show()
 
+def draw_histogram_migration_trends_for_a_year_multiple_countries(year, countries):
 
-draw_bar_chart_for_a_country_trend('India')
+    immigration_to_canada_data.reset_index()
+    immigration_to_canada_data.sort_values(['total'], ascending = False, inplace = True)
+
+    years = list(map(str,range(1980,2014)))
+    columns = ['country'] + years
+
+    ## use only the columns you require, and take the topmost 5 countries
+    data_frame = immigration_to_canada_data[columns]
+    
+    ## index which is set in pandas is used to plot in x axis. we would hence transpose
+    data_frame.set_index('country', inplace = True)
+    
+    data_frame = data_frame.loc[countries].transpose()
+
+    ## my columns are going to become rows. now remember i converted my columns to strings
+    ## unless i change them back to numeric, x values will come as empty
+    data_frame.index = data_frame.index.map(int) 
+
+    print(data_frame)
+    ## even distribution on the x axis
+    count, _edges = numpy.histogram(data_frame, 15)
+
+    data_frame.plot(
+                    kind = 'hist', \
+                    alpha=0.6, \
+                    bins = 15, \
+                    color = ['coral', 'darkslateblue', 'mediumseagreen'], \
+                    xticks = _edges, \
+                    figsize = (20,10) \
+                    )
+
+    plot.title("Histogram showing migration across globe for the countries %s" %countries)
+    plot.xlabel("Number of Migrants")
+    plot.ylabel("Number of Years")
+    plot.show()
+    
+draw_histogram_migration_trends_for_a_year_multiple_countries(2013, ['India', 'China', 'Albania'])   
+# draw_bar_chart_for_a_country_trend('India')
 # draw_histogram_for_migration_in_particular_year(2013)
 # draw_immigration_country_wise_area_chart()
 # draw_united_nations_migration_line_plot_for_country('Haiti')
