@@ -101,7 +101,7 @@ def draw_histogram_for_migration_in_particular_year(year):
     ## even distribution on the x axis
     count, _edges = numpy.histogram(data_frame)
 
-    data_frame.plot(kind='hist', color='purple', xticks = _edges)
+    data_frame.plot(kind='hist', color='purple', xticks = _edges, figsize = (20,10))
 
     plot.title("HIstogram showing migration across globe for the year %d" %year)
     plot.xlabel("Number of Migrants")
