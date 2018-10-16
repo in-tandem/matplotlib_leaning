@@ -108,9 +108,26 @@ def draw_histogram_for_migration_in_particular_year(year):
     plot.ylabel("Number of Countries")
     plot.show()
 
+def draw_bar_chart_for_a_country_trend(country):
 
-draw_histogram_for_migration_in_particular_year(2013)
+    immigration_to_canada_data.reset_index()
+    immigration_to_canada_data.set_index('country', inplace = True)
+    immigration_to_canada_data.sort_values(['total'], ascending = False, inplace = True)
+
+    years = list(map(str,range(1980,2014)))
+    
+    ## use only the columns you require, and take the topmost 5 countries
+    data_frame = immigration_to_canada_data.loc[country, years]
+    
+    data_frame.plot(kind='bar', color='red', figsize = (20,10))
+
+    plot.title("Bar Chart showing migration trends from %s " %country)
+    plot.xlabel("Number of Migrants")
+    plot.ylabel("Number of Countries")
+    plot.show()
 
 
+draw_bar_chart_for_a_country_trend('India')
+# draw_histogram_for_migration_in_particular_year(2013)
 # draw_immigration_country_wise_area_chart()
 # draw_united_nations_migration_line_plot_for_country('Haiti')
