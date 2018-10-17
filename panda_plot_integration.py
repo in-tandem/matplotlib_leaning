@@ -190,7 +190,33 @@ def draw_scatter_plot_migration_totals_all_years():
     plot.ylabel("Total")
     plot.show()
 
-draw_scatter_plot_migration_totals_all_years()
+
+
+def draw_scatter_plot_migration_totals_all_years_with_best_line_fit():
+
+    immigration_to_canada_data.reset_index()
+    
+    years = list(map(str, range(1980,2014)))
+
+    data_frame = panda.DataFrame(immigration_to_canada_data[years].sum(axis = 0))
+    data_frame.index = map(int, data_frame.index)
+    data_frame.reset_index(inplace = True)
+    data_frame.columns = ['year', 'total']
+    data_frame.plot(kind='scatter', x = 'year', y = 'total')
+
+    x = data_frame['year']
+    y = data_frame['total']
+
+    fit = numpy.polyfit(x, y , deg = 1)
+
+    plot.plot(x, x*fit[0] + fit[1], color = "magenta")
+    plot.title("Ïmmigration totals over the years")
+    plot.xlabel("Years")
+    plot.ylabel("Total")
+    plot.show()
+
+draw_scatter_plot_migration_totals_all_years_with_best_line_fit()
+# draw_scatter_plot_migration_totals_all_years()
 # draw_pie_migration_across_continents()
 # draw_histogram_migration_trends_for_a_year_multiple_countries(2013, ['India', 'China', 'Albania'])   
 # draw_bar_chart_for_a_country_trend('India')
