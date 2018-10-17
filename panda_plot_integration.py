@@ -164,7 +164,17 @@ def draw_histogram_migration_trends_for_a_year_multiple_countries(year, countrie
     plot.ylabel("Number of Years")
     plot.show()
     
-draw_histogram_migration_trends_for_a_year_multiple_countries(2013, ['India', 'China', 'Albania'])   
+
+def draw_pie_migration_across_continents():
+    immigration_to_canada_data.reset_index()
+    data_frame = immigration_to_canada_data.groupby('continent', axis=0).sum()
+    data_frame['total'].plot(kind = 'pie')
+
+    plot.title("Migration trends across continents")
+    plot.show()
+
+draw_pie_migration_across_continents()
+# draw_histogram_migration_trends_for_a_year_multiple_countries(2013, ['India', 'China', 'Albania'])   
 # draw_bar_chart_for_a_country_trend('India')
 # draw_histogram_for_migration_in_particular_year(2013)
 # draw_immigration_country_wise_area_chart()
