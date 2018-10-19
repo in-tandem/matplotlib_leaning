@@ -210,7 +210,7 @@ def draw_scatter_plot_migration_totals_all_years_with_best_line_fit():
     fit = numpy.polyfit(x, y , deg = 1)
 
     plot.plot(x, x*fit[0] + fit[1], color = "magenta")
-    plot.title("Ïmmigration totals over the years")
+    plot.title("Immigration totals over the years")
     plot.xlabel("Years")
     plot.ylabel("Total")
     plot.show()
