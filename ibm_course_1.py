@@ -53,6 +53,6 @@ world_map.choropleth(
     reset = True
 )
 world_map.save("C:\\Users\\somak\\Documents\\somak_python\\matplotlib_learning\\somak.html")
-world_map
+world_map  
 
 
